@@ -3,9 +3,15 @@
 import express from "express";
 
 const app = express();
-
+import cors from "cors";
 // Configure it
-
+if (process.env.CLIENT_URL) {
+  app.use(
+    cors({
+      origin: process.env.CLIENT_URL,
+    }),
+  );
+}
 /* ************************************************************************* */
 
 // CORS Handling: Why is the current code present and do I need to define specific allowed origins for my project?

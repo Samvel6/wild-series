@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Programs = () => {
-  const [programs, setPrograms] = useState<{ id: number; title: string }[]>([]);
+  const [programs, setPrograms] = useState<
+    { id: number; title: string; poster: string }[]
+  >([]);
 
   useEffect(() => {
-    fetch("/api/programs")
+    fetch("http://localhost:3310/api/programs")
       .then((response) => response.json())
       .then((data) => setPrograms(data));
   }, []);
@@ -17,6 +19,7 @@ const Programs = () => {
         {programs.map((program) => (
           <li key={program.id}>
             <Link to={`/programs/${program.id}`}>{program.title}</Link>
+            <img src={program.poster} alt="" />
           </li>
         ))}
       </ul>
